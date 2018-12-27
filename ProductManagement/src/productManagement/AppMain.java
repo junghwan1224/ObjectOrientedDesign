@@ -153,21 +153,28 @@ public class AppMain {
 			} // enroll button if
 			
 			else if(e.getSource() == searchbtn) {
-				
-				int cbVal =  Integer.parseInt((String)cb.getSelectedItem());
+				String cbValStr = (String)cb.getSelectedItem();
 				Product p = new Product();
 				
-				p = dao.getProduct(cbVal);
-				if(p != null) {
-					prnameTa.setText(p.getPrname());
-					priceTa.setText(String.valueOf(p.getPrice()));
-					manuTa.setText(p.getManufacture());
-				}
-				else {
-					System.out.println("일치하는 결과가 없음");
-					System.out.println(cbVal);
+				if(cbValStr == "전체" || cbValStr.length() == 0) {
 					refreshData();
 				}
+				
+				else {
+					int cbVal = Integer.parseInt(cbValStr);
+					p = dao.getProduct(cbVal);
+					if(p != null) {
+						prnameTa.setText(p.getPrname());
+						priceTa.setText(String.valueOf(p.getPrice()));
+						manuTa.setText(p.getManufacture());
+					}
+					else {
+						System.out.println("일치하는 결과가 없음");
+						System.out.println(cbVal);
+						refreshData();
+					}
+				}
+				
 				
 			} // search btn else if
 			
