@@ -20,6 +20,7 @@ public class AppMain {
 	
 	JButton enrollbtn;
 	JButton searchbtn;
+	JButton updatebtn;
 	JButton delbtn;
 	
 	boolean editmode;
@@ -53,10 +54,12 @@ public class AppMain {
 		ButtonClick bc = new ButtonClick();
 		enrollbtn = new JButton("등록");
 		searchbtn = new JButton("조회");
+		updatebtn = new JButton("수정");
 		delbtn = new JButton("삭제");
 		
 		enrollbtn.addActionListener(bc);
 		searchbtn.addActionListener(bc);
+		updatebtn.addActionListener(bc);
 		delbtn.addActionListener(bc);
 		
 		jf.add(ml, BorderLayout.PAGE_START);
@@ -93,6 +96,7 @@ public class AppMain {
 		
 		p3.add(enrollbtn);
 		p3.add(searchbtn);
+		p3.add(updatebtn);
 		p3.add(delbtn);
 		
 		ml.setText("상품 관리 프로그램입니다.");
@@ -161,9 +165,26 @@ public class AppMain {
 				else {
 					System.out.println("일치하는 결과가 없음");
 					System.out.println(cbVal);
+					refreshData();
 				}
 				
 			} // search btn else if
+			
+			else if(e.getSource() == updatebtn) {
+				int cbVal =  Integer.parseInt((String)cb.getSelectedItem());
+				Product p = new Product();
+				boolean updateFlag = false;
+				
+				p.setPrcode(cbVal);
+				p.setPrname(prnameTa.getText());
+				p.setPrice(Integer.parseInt(priceTa.getText()));
+				p.setManufacture(manuTa.getText());
+				
+				updateFlag = dao.updateProduct(p);
+				
+				if(updateFlag)
+					refreshData();
+			} // update btn else if
 			
 			else {
 				int cbVal =  Integer.parseInt((String)cb.getSelectedItem());
