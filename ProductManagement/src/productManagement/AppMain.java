@@ -153,6 +153,7 @@ public class AppMain {
 			} // enroll button if
 			
 			else if(e.getSource() == searchbtn) {
+				
 				int cbVal =  Integer.parseInt((String)cb.getSelectedItem());
 				Product p = new Product();
 				
@@ -196,6 +197,11 @@ public class AppMain {
 					refreshData();
 			} // delete btn else
 		}
+	}
+	
+	protected void finalize() throws Throwable {
+		dao.closeDB();
+		super.finalize();
 	}
 
 }
