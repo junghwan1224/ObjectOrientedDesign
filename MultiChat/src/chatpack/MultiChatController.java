@@ -18,7 +18,7 @@ public class MultiChatController implements Runnable {
 	private Socket socket;
 	private BufferedReader inMsg;
 	private PrintWriter outMsg;
-	private Gson gson;
+	private Gson gson = new Gson();
 	private Message m;
 	private Thread thread;
 	private boolean status = true;
@@ -68,6 +68,7 @@ public class MultiChatController implements Runnable {
 				else if(obj == v.msgInput) {
 					outMsg.println(gson.toJson(new Message(v.id, "", v.msgInput.getText(), "msg")));
 					v.msgInput.setText("");
+					chatData.refreshData(v.msgInput.getText());
 				}
 			}
 		});
