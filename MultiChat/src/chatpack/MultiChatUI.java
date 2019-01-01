@@ -24,7 +24,7 @@ public class MultiChatUI extends JFrame {
 	protected Container tab; // 로그인, 로그아웃 상태를 담아줄 컨테이너
 	protected CardLayout cardLayout; // 로그인, 로그아웃 상태를 카드 레이아웃으로 처리
 	
-	protected String id;
+	protected String id; // 사용자로부터 입력 받은 대화명 값을 저장하는 변수
 	
 	public MultiChatUI() {
 		
